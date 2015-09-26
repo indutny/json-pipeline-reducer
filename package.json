@@ -1,0 +1,34 @@
+{
+  "name": "json-pipeline-reducer",
+  "version": "1.0.0",
+  "description": "Reducer for json-pipeline",
+  "main": "lib/reducer.js",
+  "scripts": {
+    "test": "mocha --reporter=spec test/*-test.js && jscs lib/*.js test/*.js && jshint lib/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/indutny/json-pipeline-reducer.git"
+  },
+  "keywords": [
+    "json-pipeline",
+    "reducer",
+    "reduction",
+    "graph",
+    "sea-of-nodes"
+  ],
+  "author": "Fedor Indutny <fedor@indutny.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/indutny/json-pipeline-reducer/issues"
+  },
+  "homepage": "https://github.com/indutny/json-pipeline-reducer#readme",
+  "devDependencies": {
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0",
+    "json-pipeline": "^3.2.0",
+    "mocha": "^2.3.3"
+  },
+  "dependencies": {
+  }
+}
