@@ -46,3 +46,24 @@ PrefixReduction.prototype.reduce = function reduce(node, reducer) {
   node.opcode = this.prefix + node.opcode;
   reducer.change(node);
 };
+
+function MathReduction(prefix) {
+  reducer.Reduction.call(this);
+  this.prefix = prefix;
+}
+util.inherits(MathReduction, reducer.Reduction);
+exports.MathReduction = MathReduction;
+
+MathReduction.prototype.reduce = function reduce(node, reducer) {
+  if (node.opcode !== 'add')
+    return;
+
+  var left = node.inputs[0];
+  var right = node.inputs[1];
+  if (left.opcode !== 'literal' || right.opcode !== 'literal')
+    return;
+
+  var res = reducer.graph.add('literal')
+      .addLiteral(left.literals[0] + right.literals[0]);
+  reducer.replace(node, res);
+};
