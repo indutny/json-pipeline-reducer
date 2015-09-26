@@ -42,4 +42,18 @@ describe('Reducer', function() {
     reducer.reduce(p);
     assert.equal(visit.countUnique(), count);
   });
+
+  it('should prefix all nodes', function() {
+    var prefixA = new fixtures.PrefixReduction('A:');
+    var prefixB = new fixtures.PrefixReduction('B:');
+    reducer.addReduction(prefixB);
+    reducer.addReduction(prefixA);
+
+    var count = p.nodes.length;
+    reducer.reduce(p);
+    assert.equal(p.nodes.length, count);
+
+    for (var i = 0; i < p.nodes.length; i++)
+      assert(/^A:B:/.test(p.nodes[i].opcode));
+  });
 });

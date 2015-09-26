@@ -31,3 +31,18 @@ VisitReduction.prototype.countUnique = function countUnique() {
 
   return count;
 };
+
+function PrefixReduction(prefix) {
+  reducer.Reduction.call(this);
+  this.prefix = prefix;
+}
+util.inherits(PrefixReduction, reducer.Reduction);
+exports.PrefixReduction = PrefixReduction;
+
+PrefixReduction.prototype.reduce = function reduce(node, reducer) {
+  if (node.opcode.indexOf(this.prefix) !== -1)
+    return;
+
+  node.opcode = this.prefix + node.opcode;
+  reducer.change(node);
+};
