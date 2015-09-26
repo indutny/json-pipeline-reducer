@@ -66,4 +66,9 @@ MathReduction.prototype.reduce = function reduce(node, reducer) {
   var res = reducer.graph.add('literal')
       .addLiteral(left.literals[0] + right.literals[0]);
   reducer.replace(node, res);
+
+  if (left.uses.length === 0)
+    reducer.remove(left);
+  if (right.uses.length === 0)
+    reducer.remove(right);
 };
