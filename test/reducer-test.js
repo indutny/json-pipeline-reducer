@@ -102,4 +102,20 @@ describe('Reducer', function() {
     assert.equal(ret.inputs[0].opcode, 'literal');
     assert.equal(ret.inputs[0].literals[0], 136);
   });
+
+  it('should clone', function() {
+    p = pipeline.create();
+
+    var single = p.add('single');
+    var use1 = p.add('use', single);
+    var use2 = p.add('use', single);
+
+    var clone = new fixtures.CloneReduction();
+    reducer.addReduction(clone);
+
+    reducer.reduce(p);
+
+    assert.equal(use1.inputs[0].opcode, 'clone');
+    assert.equal(use2.inputs[0].opcode, 'clone');
+  });
 });

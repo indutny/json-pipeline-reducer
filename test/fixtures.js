@@ -72,3 +72,28 @@ MathReduction.prototype.reduce = function reduce(node, reducer) {
   if (right.uses.length === 0)
     reducer.remove(right);
 };
+
+function CloneReduction(prefix) {
+  reducer.Reduction.call(this);
+  this.prefix = prefix;
+}
+util.inherits(CloneReduction, reducer.Reduction);
+exports.CloneReduction = CloneReduction;
+
+CloneReduction.prototype.reduce = function reduce(node, reducer) {
+  if (node.opcode !== 'single')
+    return;
+
+  for (var i = node.uses.length - 2; i >= 0; i -= 2) {
+    var use = node.uses[i];
+    var index = node.uses[i + 1];
+
+    var clone = reducer.graph.create('clone');
+    reducer.add(clone);
+
+    use.replaceInput(index, clone);
+    reducer.change(use);
+  }
+
+  reducer.remove(node);
+};
