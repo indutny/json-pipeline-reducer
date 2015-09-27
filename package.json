@@ -1,6 +1,6 @@
 {
   "name": "json-pipeline-reducer",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Reducer for json-pipeline",
   "main": "lib/reducer.js",
   "scripts": {
